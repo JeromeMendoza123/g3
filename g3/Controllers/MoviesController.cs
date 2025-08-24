@@ -151,3 +151,4 @@ namespace g3.Controllers
         }
     }
 }
+//Responsible for showing the infos of a Movie
