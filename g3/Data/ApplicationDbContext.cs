@@ -9,5 +9,7 @@ namespace g3.Data
             : base(options)
         {
         }
+        public DbSet<g3.Models.Movie> Movies { get; set; }
+
     }
 }

@@ -1,6 +1,9 @@
-﻿@{
+﻿@model IEnumerable<g3.Models.Movie>
+
+@{
     ViewData["Title"] = "Home Page";
 }
+
 <style>
     body {
         background: radial-gradient(circle at center, #000000 0%, #1a1a1a 100%);
@@ -91,31 +94,13 @@
 </div>
 
 <div class="movie-grid">
-    <div class="movie-card">
-        <h3>Edge of Tomorrow</h3>
-        <p><strong>Genre:</strong> Sci-Fi / Action</p>
-        <p><strong>Release Year:</strong> 2014</p>
-        <p><strong>Rating:</strong> ⭐ 8.0</p>
-    </div>
-
-    <div class="movie-card">
-        <h3>Inception</h3>
-        <p><strong>Genre:</strong> Thriller / Sci-Fi</p>
-        <p><strong>Release Year:</strong> 2010</p>
-        <p><strong>Rating:</strong> ⭐ 8.8</p>
-    </div>
-
-    <div class="movie-card">
-        <h3>Interstellar</h3>
-        <p><strong>Genre:</strong> Adventure / Drama</p>
-        <p><strong>Release Year:</strong> 2014</p>
-        <p><strong>Rating:</strong> ⭐ 8.6</p>
-    </div>
-
-    <div class="movie-card">
-        <h3>Mad Max: Fury Road</h3>
-        <p><strong>Genre:</strong> Action</p>
-        <p><strong>Release Year:</strong> 2015</p>
-        <p><strong>Rating:</strong> ⭐ 8.1</p>
-    </div>
+    @foreach (var movie in Model)
+    {
+        <div class="movie-card">
+            <h3>@movie.Title</h3>
+            <p><strong>Genre:</strong> @movie.Genre</p>
+            <p><strong>Release Year:</strong> @movie.ReleaseDate.Year</p>
+            <p><strong>Rating:</strong> ⭐ @movie.Rating</p>
+        </div>
+    }
 </div>

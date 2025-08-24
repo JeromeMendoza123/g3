@@ -1,0 +1,81 @@
+﻿@model g3.Models.Movie
+
+@{
+    ViewData["Title"] = "Details";
+
+    // Auto-convert YouTube watch?v= links into embed/ format
+    string trailerEmbedUrl = null;
+    if (!string.IsNullOrEmpty(Model.TrailerUrl))
+    {
+        if (Model.TrailerUrl.Contains("watch?v="))
+        {
+            trailerEmbedUrl = Model.TrailerUrl.Replace("watch?v=", "embed/");
+        }
+        else
+        {
+            trailerEmbedUrl = Model.TrailerUrl;
+        }
+    }
+}
+
+<h1>Movie Details</h1>
+
+<div>
+    <h4>@Model.Title</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">Title</dt>
+        <dd class="col-sm-10">@Model.Title</dd>
+
+        <dt class="col-sm-2">Genre</dt>
+        <dd class="col-sm-10">@Model.Genre</dd>
+
+        <dt class="col-sm-2">Release Date</dt>
+        <dd class="col-sm-10">@Model.ReleaseDate.ToShortDateString()</dd>
+
+        <dt class="col-sm-2">Rating</dt>
+        <dd class="col-sm-10">@Model.Rating</dd>
+
+        <dt class="col-sm-2">Poster</dt>
+        <dd class="col-sm-10">
+            @if (!string.IsNullOrEmpty(Model.PosterUrl))
+            {
+                <img src="@Model.PosterUrl" alt="Poster" style="max-width:200px; border-radius:8px;" />
+            }
+            else
+            {
+                <span>No poster available</span>
+            }
+        </dd>
+
+        <dt class="col-sm-2">Trailer</dt>
+        <dd class="col-sm-10">
+            @if (!string.IsNullOrEmpty(trailerEmbedUrl))
+            {
+                <iframe width="420" height="236"
+                        src="@trailerEmbedUrl"
+                        frameborder="0"
+                        allowfullscreen>
+                </iframe>
+            }
+            else
+            {
+                <span>No trailer available</span>
+            }
+        </dd>
+
+        <dt class="col-sm-2">Director</dt>
+        <dd class="col-sm-10">@Model.Director</dd>
+
+        <dt class="col-sm-2">Release Year</dt>
+        <dd class="col-sm-10">@Model.ReleaseYear</dd>
+
+        <dt class="col-sm-2">Copies Available</dt>
+        <dd class="col-sm-10">@Model.CopiesAvailable</dd>
+    </dl>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">Edit</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>
